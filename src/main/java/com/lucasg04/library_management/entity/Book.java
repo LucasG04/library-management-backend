@@ -16,15 +16,14 @@ public class Book {
 
     private String title;
 
+    private String author;
+
     @Enumerated(EnumType.STRING)
-    private Status status = Status.AVAILABLE;
+    private BookStatus status = BookStatus.AVAILABLE;
 
-    public enum Status {
-        AVAILABLE,
-        RENTED
-    }
-
-    public Book(String title) {
+    public Book(String title, String author, BookStatus status) {
         this.title = title;
+        this.author = author;
+        this.status = status;
     }
 }

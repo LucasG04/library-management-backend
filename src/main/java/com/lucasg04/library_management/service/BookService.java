@@ -1,6 +1,7 @@
 package com.lucasg04.library_management.service;
 
 import com.lucasg04.library_management.entity.Book;
+import com.lucasg04.library_management.entity.BookStatus;
 import com.lucasg04.library_management.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -22,8 +23,8 @@ public class BookService {
     }
 
     // Create a new book
-    public Book createBook(String title) {
-        Book book = new Book(title);
+    public Book createBook(String title, String author) {
+        Book book = new Book(title, author, BookStatus.AVAILABLE);
         return bookRepository.save(book);
     }
 
@@ -32,7 +33,7 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    public Book setBookStatus(UUID id, Book.Status status) {
+    public Book setBookStatus(UUID id, BookStatus status) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found"));
         if (book.getStatus() == status) {

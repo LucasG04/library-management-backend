@@ -1,6 +1,7 @@
 package com.lucasg04.library_management.controller;
 
 import com.lucasg04.library_management.entity.Book;
+import com.lucasg04.library_management.entity.BookStatus;
 import com.lucasg04.library_management.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class BookController {
     // POST /books - Create a new book
     @PostMapping
     public Book createBook(@RequestBody Book book) {
-        return bookService.createBook(book.getTitle());
+        return bookService.createBook(book.getTitle(), book.getAuthor());
     }
 
     // DELETE /books/{id} - Delete a book
@@ -39,12 +40,12 @@ public class BookController {
     // PUT /books/{id}/rent - Mark a book as rented
     @PutMapping("/{id}/rent")
     public Book rentBook(@PathVariable UUID id) {
-        return bookService.setBookStatus(id, Book.Status.RENTED);
+        return bookService.setBookStatus(id, BookStatus.RENTED);
     }
 
     // PUT /books/{id}/return - Mark a book as available
     @PutMapping("/{id}/return")
     public Book returnBook(@PathVariable UUID id) {
-        return bookService.setBookStatus(id, Book.Status.AVAILABLE);
+        return bookService.setBookStatus(id, BookStatus.AVAILABLE);
     }
 }
